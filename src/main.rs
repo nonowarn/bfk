@@ -41,7 +41,7 @@ fn main() {
         Ok(code) => code,
         Err(err) => {
             eprintln!("Error while reading {}: {}", filename, err);
-            exit(1);
+            exit(exitcode::USAGE);
         }
     };
 
@@ -49,7 +49,7 @@ fn main() {
         Some(language_str) => match Language::make_from_string(&language_str.to_string()) {
             None => {
                 eprintln!("language must have exact 8 characters");
-                exit(2);
+                exit(exitcode::DATAERR);
             }
             Some(language) => language
         },

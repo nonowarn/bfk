@@ -4,6 +4,7 @@ use std::io::{stdin, stdout};
 use clap::{App, Arg};
 
 use bfk::*;
+use std::process::exit;
 
 fn main() {
     let matches = App::new("bf")
@@ -36,7 +37,14 @@ fn main() {
 
     let no_compress = matches.is_present("no_compress");
 
-    let code = read_to_string(filename).unwrap();
+    let code = match read_to_string(filename) {
+        Ok(code) => code,
+        Err(err) => {
+            eprintln!("Error while reading {}: {}", filename, err);
+            exit(1);
+        }
+    };
+
     let language = match matches.value_of("language") {
         Some(language_str) => Language::make_from_string(&language_str.to_string()),
         None => Language::default(),

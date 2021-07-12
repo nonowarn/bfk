@@ -2,8 +2,15 @@
 name = "bf"
 version = "0.1.0"
 edition = "2018"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+authors = ["Yusaku Hashimoto <nonowarn@gmail.com>"]
+license = "MIT"
+description = "Brainfuck interpreter"
+homepage = "https://github.com/nonowarn/bf"
+repository = "https://github.com/nonowarn/bf"
+include = [
+    "**/*.rs",
+    "Cargo.toml",
+]
 
 [dependencies]
 clap = "2.33.3"

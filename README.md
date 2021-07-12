@@ -30,7 +30,7 @@ This interpreter runs it as a transformed Brainfuck program.
 ```
 $ cat > hello.abc.bf
 aaaaaaaagcaaaagcaacaaacaaacaddddbhcacacbccagdhdbhccfcbbbfaaaaaaaffaaafccfdbfdfaaafbbbbbbfbbbbbbbbfccafcaaf
-$ bf --language=abcdefgh hello.abc.bf
+$ bfk --language=abcdefgh hello.abc.bf
 Hello World!
 ```
 
@@ -39,7 +39,7 @@ Even emojis.
 ```
 $ cat > hello.emoji.bf
 😀😀😀😀😀😀😀😀😂😄😀😀😀😀😂😄😀😀😄😀😀😀😄😀😀😀😄😀😁😁😁😁😃🤣😄😀😄😀😄😃😄😄😀😂😁🤣😁😃🤣😄😄😅😄😃😃😃😅😀😀😀😀😀😀😀😅😅😀😀😀😅😄😄😅😁😃😅😁😅😀😀😀😅😃😃😃😃😃😃😅😃😃😃😃😃😃😃😃😅😄😄😀😅😄😀😀😅
-$ bf --language=😀😃😄😁😆😅😂🤣 "hello.emoji.bg
+$ bfk --language=😀😃😄😁😆😅😂🤣 "hello.emoji.bg
 ```
 
 ## LICENSE

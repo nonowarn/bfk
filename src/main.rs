@@ -41,7 +41,7 @@ fn main() {
         Ok(code) => code,
         Err(err) => {
             eprintln!("Error while reading {}: {}", filename, err);
-            exit(exitcode::USAGE);
+            exit(exitcode::NOINPUT);
         }
     };
 

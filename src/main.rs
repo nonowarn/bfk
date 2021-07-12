@@ -27,7 +27,7 @@ fn main() {
         .arg(
             Arg::with_name("language")
                 .help("Language to run as a string concatenated with instructions in order of: +-><,.[]")
-                .short("s")
+                .short("l")
                 .long("language")
                 .takes_value(true)
         )

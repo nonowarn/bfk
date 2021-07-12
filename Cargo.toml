@@ -5,8 +5,8 @@ edition = "2018"
 authors = ["Yusaku Hashimoto <nonowarn@gmail.com>"]
 license = "MIT"
 description = "Brainfuck interpreter"
-homepage = "https://github.com/nonowarn/bf"
-repository = "https://github.com/nonowarn/bf"
+homepage = "https://github.com/nonowarn/bfi"
+repository = "https://github.com/nonowarn/bfi"
 include = [
     "**/*.rs",
     "Cargo.toml",

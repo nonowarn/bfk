@@ -3,7 +3,7 @@
 ## Install
 
 ```
-$ cargo install bf
+$ cargo install bfi
 ```
 
 ## Usage

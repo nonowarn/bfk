@@ -39,7 +39,7 @@ Even emojis.
 ```
 $ cat > hello.emoji.bf
 😀😀😀😀😀😀😀😀😂😄😀😀😀😀😂😄😀😀😄😀😀😀😄😀😀😀😄😀😁😁😁😁😃🤣😄😀😄😀😄😃😄😄😀😂😁🤣😁😃🤣😄😄😅😄😃😃😃😅😀😀😀😀😀😀😀😅😅😀😀😀😅😄😄😅😁😃😅😁😅😀😀😀😅😃😃😃😃😃😃😅😃😃😃😃😃😃😃😃😅😄😄😀😅😄😀😀😅
-$ bfk --language=😀😃😄😁😆😅😂🤣 "hello.emoji.bg
+$ bfk --language=😀😃😄😁😆😅😂🤣 hello.emoji.bf
 ```
 
 ## LICENSE

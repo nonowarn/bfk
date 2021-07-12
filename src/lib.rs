@@ -25,23 +25,25 @@ impl Language {
     }
 
     /// Make from string. The length of string must be 8
-    pub fn make_from_string(s: &String) -> Language {
+    pub fn make_from_string(s: &String) -> Option<Language> {
         if s.chars().count() != 8 {
-            panic!("Language string's length must be 8")
+            return None;
         }
 
         let chars = s.chars().collect::<Vec<char>>();
 
-        Language {
-            inc: chars[0],
-            dec: chars[1],
-            inc_ptr: chars[2],
-            dec_ptr: chars[3],
-            get_char: chars[4],
-            put_char: chars[5],
-            loop_start: chars[6],
-            loop_end: chars[7],
-        }
+        Some(
+            Language {
+                inc: chars[0],
+                dec: chars[1],
+                inc_ptr: chars[2],
+                dec_ptr: chars[3],
+                get_char: chars[4],
+                put_char: chars[5],
+                loop_start: chars[6],
+                loop_end: chars[7],
+            }
+        )
     }
 }
 
@@ -532,6 +534,10 @@ mod tests {
     #[test]
     fn test_language_from_string() {
         let language = Language::make_from_string(&"abcdefgh".to_string());
+
+        assert!(language.is_some());
+
+        let language = language.unwrap();
 
         assert_eq!(language.inc, 'a');
         assert_eq!(language.dec, 'b');

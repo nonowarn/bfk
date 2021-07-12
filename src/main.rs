@@ -46,7 +46,13 @@ fn main() {
     };
 
     let language = match matches.value_of("language") {
-        Some(language_str) => Language::make_from_string(&language_str.to_string()),
+        Some(language_str) => match Language::make_from_string(&language_str.to_string()) {
+            None => {
+                eprintln!("language must have exact 8 characters");
+                exit(2);
+            }
+            Some(language) => language
+        },
         None => Language::default(),
     };
 

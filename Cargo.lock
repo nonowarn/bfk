@@ -23,7 +23,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "bfi"
+name = "bfk"
 version = "0.1.0"
 dependencies = [
  "clap",

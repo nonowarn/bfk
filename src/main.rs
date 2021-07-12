@@ -3,7 +3,7 @@ use std::io::{stdin, stdout};
 
 use clap::{App, Arg};
 
-use bfi::*;
+use bfk::*;
 
 fn main() {
     let matches = App::new("bf")

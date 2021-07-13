@@ -7,8 +7,8 @@ use clap::{App, Arg};
 use bfk::*;
 
 fn main() {
-    fn is_positive_int(v: String) -> Result<(), String> {
-        match v.parse::<u64>() {
+    fn is_usize(v: String) -> Result<(), String> {
+        match v.parse::<usize>() {
             Ok(_) => Ok(()),
             Err(_) => Err("Must be a positive integer".into())
         }
@@ -44,7 +44,7 @@ fn main() {
                 .short("b")
                 .long("buffer-size")
                 .takes_value(true)
-                .validator(is_positive_int)
+                .validator(is_usize)
         )
         .get_matches();
 

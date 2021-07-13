@@ -12,7 +12,7 @@ $ cargo install bfk
 $ cat > hello.bf
 ++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.
 $ bfk hello.bf
-Hello, World!
+Hello World!
 ```
 
 ## Create your own fuck

@@ -1,12 +1,19 @@
 use std::fs::read_to_string;
 use std::io::{stdin, stdout};
+use std::process::exit;
 
 use clap::{App, Arg};
 
 use bfk::*;
-use std::process::exit;
 
 fn main() {
+    fn is_positive_int(v: String) -> Result<(), String> {
+        match v.parse::<u64>() {
+            Ok(_) => Ok(()),
+            Err(_) => Err("Must be a positive integer".into())
+        }
+    }
+
     let matches = App::new("bf")
         .version("0.1")
         .author("Yusaku Hashimoto <nonowarn@gmail.com>")
@@ -31,9 +38,21 @@ fn main() {
                 .long("language")
                 .takes_value(true)
         )
+        .arg(
+            Arg::with_name("buffer_size")
+                .help("Tape buffer size in bytes")
+                .short("b")
+                .long("buffer-size")
+                .takes_value(true)
+                .validator(is_positive_int)
+        )
         .get_matches();
 
     let filename = matches.value_of("PROGRAM").unwrap();
+    let buffer_size = match matches.value_of("buffer_size") {
+        None => { 1024 * 1024 }
+        Some(size) => { size.parse().expect("Positive integer") }
+    };
 
     let no_compress = matches.is_present("no_compress");
 
@@ -58,7 +77,7 @@ fn main() {
 
     let ops = parse(&code, &language);
 
-    let mut data = [0u8; 1024 * 1024];
+    let mut data = vec![0u8; buffer_size];
 
     let mut stdout = stdout();
     let mut stdin = stdin();

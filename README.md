@@ -17,7 +17,7 @@ Hello, World!
 
 ## Create your own fuck
 
-For example, Replace `+-><,.[]` with `abcdefgh`. 
+For example, Replace `+-><,.[]` with `abcdefgh`.
 This is replaced Hello World program in Brainfuck.
 
 ```
@@ -40,6 +40,7 @@ Even emojis.
 $ cat > hello.emoji.bf
 😀😀😀😀😀😀😀😀😂😄😀😀😀😀😂😄😀😀😄😀😀😀😄😀😀😀😄😀😁😁😁😁😃🤣😄😀😄😀😄😃😄😄😀😂😁🤣😁😃🤣😄😄😅😄😃😃😃😅😀😀😀😀😀😀😀😅😅😀😀😀😅😄😄😅😁😃😅😁😅😀😀😀😅😃😃😃😃😃😃😅😃😃😃😃😃😃😃😃😅😄😄😀😅😄😀😀😅
 $ bfk --language=😀😃😄😁😆😅😂🤣 hello.emoji.bf
+Hello World!
 ```
 
 ## LICENSE

@@ -192,26 +192,24 @@ pub fn parse(source: &String, language: &Language) -> Code<Op> {
     let mut map_stack = Vec::new();
 
     for (pc, char) in token_chars.enumerate() {
-        if language.inc == char {
-            ops.push(Op::Inc);
-        } else if language.dec == char {
-            ops.push(Op::Dec);
-        } else if language.inc_ptr == char {
-            ops.push(Op::IncPtr);
-        } else if language.dec_ptr == char {
-            ops.push(Op::DecPtr);
-        } else if language.put_char == char {
-            ops.push(Op::PutChar);
-        } else if language.get_char == char {
-            ops.push(Op::GetChar);
-        } else if language.loop_start == char {
-            ops.push(Op::LoopStart);
-            map_stack.push(pc);
-        } else if language.loop_end == char {
-            ops.push(Op::LoopEnd);
-            let begin = map_stack.pop().expect("Unmatched loop end");
-            jump_table[begin] = pc + 1;
-            jump_table[pc] = begin + 1;
+        match char {
+            ch if language.inc == ch => ops.push(Op::Inc),
+            ch if language.dec == ch => ops.push(Op::Dec),
+            ch if language.inc_ptr == ch => ops.push(Op::IncPtr),
+            ch if language.dec_ptr == ch => ops.push(Op::DecPtr),
+            ch if language.put_char == ch => ops.push(Op::PutChar),
+            ch if language.get_char == ch => ops.push(Op::GetChar),
+            ch if language.loop_start == ch => {
+                ops.push(Op::LoopStart);
+                map_stack.push(pc);
+            }
+            ch if language.loop_end == ch => {
+                ops.push(Op::LoopEnd);
+                let begin = map_stack.pop().expect("Unmatched loop end");
+                jump_table[begin] = pc + 1;
+                jump_table[pc] = begin + 1;
+            }
+            _ => ()
         }
     }
 

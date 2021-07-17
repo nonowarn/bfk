@@ -248,44 +248,33 @@ pub fn compress(code: &Code<Op>) -> Code<CompressedOp> {
 
     let mut jump_table = vec![0; op_groups.len()];
 
+    macro_rules! read_op {
+        ($stmt:stmt) => {
+            {
+               $stmt
+               pc += 1;
+            }
+        }
+    }
+
     for (op, count) in op_groups {
         match op {
-            Op::Inc => {
-                compressed_ops.push(CompressedOp::Add(count as u8));
-                pc += 1;
-            }
-            Op::Dec => {
-                compressed_ops.push(CompressedOp::Sub(count as u8));
-                pc += 1;
-            }
-            Op::IncPtr => {
-                compressed_ops.push(CompressedOp::Forward(count));
-                pc += 1;
-            }
-            Op::DecPtr => {
-                compressed_ops.push(CompressedOp::Back(count));
-                pc += 1;
-            }
-            Op::PutChar => {
-                compressed_ops.push(CompressedOp::PutChar);
-                pc += 1;
-            }
-            Op::GetChar => {
-                compressed_ops.push(CompressedOp::GetChar);
-                pc += 1;
-            }
-            Op::LoopStart => {
+            Op::Inc => read_op!(compressed_ops.push(CompressedOp::Add(count as u8))),
+            Op::Dec => read_op!(compressed_ops.push(CompressedOp::Sub(count as u8))),
+            Op::IncPtr => read_op!(compressed_ops.push(CompressedOp::Forward(count))),
+            Op::DecPtr => read_op!(compressed_ops.push(CompressedOp::Back(count))),
+            Op::PutChar => read_op!(compressed_ops.push(CompressedOp::PutChar)),
+            Op::GetChar => read_op!(compressed_ops.push(CompressedOp::GetChar)),
+            Op::LoopStart => read_op!({
                 compressed_ops.push(CompressedOp::LoopStart);
                 map_stack.push(pc);
-                pc += 1;
-            }
-            Op::LoopEnd => {
+            }),
+            Op::LoopEnd => read_op!({
                 compressed_ops.push(CompressedOp::LoopEnd);
                 let begin = map_stack.pop().expect("Unmatched loop end");
                 jump_table[begin] = pc + 1;
                 jump_table[pc] = begin + 1;
-                pc += 1;
-            }
+            }),
         }
     }
 

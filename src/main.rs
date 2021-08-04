@@ -15,7 +15,7 @@ fn main() {
     }
 
     let matches = App::new("bf")
-        .version("0.1")
+        .version("0.2.0")
         .author("Yusaku Hashimoto <nonowarn@gmail.com>")
         .about("Brainfuck Interpreter")
         .arg(

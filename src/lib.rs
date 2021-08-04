@@ -234,7 +234,6 @@ pub fn compress(code: &Code<Op>) -> Code<CompressedOp> {
         if let Some(last_op_) = last_op {
             if last_op_ == *op && is_repeatable(last_op_) {
                 count += 1;
-                continue;
             } else {
                 op_groups.push((last_op_, count));
 

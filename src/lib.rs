@@ -226,9 +226,13 @@ pub fn compress(code: &Code<Op>) -> Code<CompressedOp> {
     let mut map_stack = Vec::new();
     let mut op_groups: Vec<(Op, usize)> = Vec::new();
 
+    fn is_repeatable(op: Op) -> bool {
+        op == Op::Inc || op == Op::Dec || op == Op::IncPtr || op == Op::DecPtr
+    }
+
     for op in code.ops.iter() {
         if let Some(last_op_) = last_op {
-            if last_op_ == *op && (last_op_ == Op::Inc || last_op_ == Op::Dec || last_op_ == Op::IncPtr || last_op_ == Op::DecPtr) {
+            if last_op_ == *op && is_repeatable(last_op_) {
                 count += 1;
                 continue;
             } else {

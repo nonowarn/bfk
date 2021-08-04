@@ -1,4 +1,5 @@
 use std::io::{Read, Write};
+use std::cmp::min;
 
 /// Language to parse and execute.
 pub struct Language {
@@ -128,12 +129,20 @@ impl<'a, R: Read, W: Write> Environment<'a, R, W> {
 
     /// Add to pointer
     pub fn add_ptr(&mut self, n: usize) {
-        self.pointer += n;
+        let pointer_max = self.data.len() - 1;
+
+        // Avoiding overflow panic
+        self.pointer = if pointer_max >= n && pointer_max - n <= self.pointer {
+            pointer_max
+        } else {
+            min(pointer_max, self.pointer + n)
+        }
     }
 
     /// Sub from pointer
     pub fn sub_ptr(&mut self, n: usize) {
-        self.pointer -= n;
+        // Avoiding underflow panic
+        self.pointer = if self.pointer <= n { 0 } else { self.pointer - n };
     }
 
     /// Print data under the pointer as a character
@@ -415,6 +424,22 @@ mod tests {
 
         let output_string = from_utf8(&output[0..13]).expect("Encoding error");
         assert_eq!(output_string, "Hello World!\n");
+    }
+
+    #[test]
+    fn test_run_safe() {
+        let language = Language::default();
+
+        let ops = parse(&"<<<<<<.>>>>>>.".to_string(), &language);
+
+        let mut data = [0; 1];
+        let mut input = Cursor::new(vec![]);
+        let mut output = Vec::new();
+
+        let mut env = Environment::new(&mut data, &mut input, &mut output);
+
+        // Should not panic
+        run(&ops, &mut env);
     }
 
     #[test]

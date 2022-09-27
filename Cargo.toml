@@ -13,5 +13,5 @@ include = [
 ]
 
 [dependencies]
-clap = "2.33.3"
+clap = "3.2.22"
 exitcode = "1.1.2"

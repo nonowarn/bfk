@@ -7,7 +7,7 @@ use clap::{App, Arg};
 use bfk::*;
 
 fn main() {
-    fn is_usize(v: String) -> Result<(), String> {
+    fn is_usize(v: &str) -> Result<(), String> {
         match v.parse::<usize>() {
             Ok(_) => Ok(()),
             Err(_) => Err("Must be a positive integer".into())
@@ -27,21 +27,21 @@ fn main() {
         .arg(
             Arg::with_name("no_compress")
                 .help("Don't compress operations before running")
-                .short("n")
+                .short('n')
                 .long("no-compress")
                 .takes_value(false)
         )
         .arg(
             Arg::with_name("language")
                 .help("Language to run as a string concatenated with instructions in order of: +-><,.[]")
-                .short("l")
+                .short('l')
                 .long("language")
                 .takes_value(true)
         )
         .arg(
             Arg::with_name("buffer_size")
                 .help("Tape buffer size in bytes")
-                .short("b")
+                .short('b')
                 .long("buffer-size")
                 .takes_value(true)
                 .validator(is_usize)
